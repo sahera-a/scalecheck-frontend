@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import EmptyState from "./EmptyState";
 import axios from "axios";
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, BarChart, Bar,
 } from "recharts";
+import EmptyState from "./EmptyState";
 
 const BASE_URL = "https://ion-scale-check-diagnostic.onrender.com";
 const PIE_COLORS = ["#3a7d5c", "#b23a3a"];
@@ -54,19 +54,33 @@ function AdminView() {
 
   if (!authed) {
     return (
-      <div className="admin-login">
-        <h2>Admin Access</h2>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleLogin(password)}
-        />
-        <button onClick={() => handleLogin(password)} disabled={loading}>
-          {loading ? "Checking..." : "Enter"}
-        </button>
-        {authError && <p className="error">{authError}</p>}
+      <div className="admin-login-page">
+        <div className="admin-login-blob admin-login-blob-1"></div>
+        <div className="admin-login-blob admin-login-blob-2"></div>
+        <svg className="admin-login-watermark" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="150,30 260,110 220,240 80,240 40,110" fill="none" stroke="rgba(201,162,75,0.18)" strokeWidth="1.5"/>
+          <polygon points="150,70 220,125 195,215 105,215 80,125" fill="none" stroke="rgba(201,162,75,0.18)" strokeWidth="1.5"/>
+          <polygon points="150,110 185,140 170,190 130,190 115,140" fill="rgba(201,162,75,0.08)" stroke="rgba(201,162,75,0.18)" strokeWidth="1.5"/>
+        </svg>
+
+        <div className="admin-login-card">
+          <span className="admin-login-logo">ScaleCheck</span>
+          <h2>Admin Access</h2>
+          <p className="admin-login-subtitle">
+            Enter the admin password to view analytics and submissions.
+          </p>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleLogin(password)}
+          />
+          <button onClick={() => handleLogin(password)} disabled={loading}>
+            {loading ? "Checking..." : "Enter Dashboard"}
+          </button>
+          {authError && <p className="error">{authError}</p>}
+        </div>
       </div>
     );
   }
@@ -127,118 +141,127 @@ function AdminView() {
       </div>
 
       {tab === "overview" && (
-        <>
-        {total === 0 ? (
-      <EmptyState title="No assessments yet" message="Once someone completes the diagnostic, your stats and charts will appear here." />
-    ) : (
-    <>
-          <div className="stat-cards">
-            <div className="stat-card"><span className="stat-card-value">{total}</span><span className="stat-card-label">Total Assessments</span></div>
-            <div className="stat-card"><span className="stat-card-value">{passed}</span><span className="stat-card-label">Passed (No Flags)</span></div>
-            <div className="stat-card"><span className="stat-card-value">{failed}</span><span className="stat-card-label">Flagged Risk</span></div>
-            <div className="stat-card"><span className="stat-card-value">{successRate}%</span><span className="stat-card-label">Success Rate</span></div>
-            <div className="stat-card"><span className="stat-card-value">{avgScore}</span><span className="stat-card-label">Average Score</span></div>
-            <div className="stat-card"><span className="stat-card-value">{feedback.length}</span><span className="stat-card-label">Feedback Received</span></div>
-          </div>
-
-          <div className="charts-grid">
-            <div className="chart-box">
-              <h4>Daily Activity</h4>
-              <ResponsiveContainer width="100%" height={220}>
-                <LineChart data={dailyData}>
-                  <CartesianGrid stroke="#eee" />
-                  <XAxis dataKey="day" fontSize={11} />
-                  <YAxis allowDecimals={false} fontSize={11} />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="count" stroke="#c9a24b" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
+        total === 0 ? (
+          <EmptyState title="No assessments yet" message="Once someone completes the diagnostic, your stats and charts will appear here." />
+        ) : (
+          <>
+            <div className="stat-cards">
+              <div className="stat-card"><span className="stat-card-value">{total}</span><span className="stat-card-label">Total Assessments</span></div>
+              <div className="stat-card"><span className="stat-card-value">{passed}</span><span className="stat-card-label">Passed (No Flags)</span></div>
+              <div className="stat-card"><span className="stat-card-value">{failed}</span><span className="stat-card-label">Flagged Risk</span></div>
+              <div className="stat-card"><span className="stat-card-value">{successRate}%</span><span className="stat-card-label">Success Rate</span></div>
+              <div className="stat-card"><span className="stat-card-value">{avgScore}</span><span className="stat-card-label">Average Score</span></div>
+              <div className="stat-card"><span className="stat-card-value">{feedback.length}</span><span className="stat-card-label">Feedback Received</span></div>
             </div>
 
-            <div className="chart-box">
-              <h4>Pass vs Flagged</h4>
-              <ResponsiveContainer width="100%" height={220}>
-                <PieChart>
-                  <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={70} label>
-                    {pieData.map((entry, i) => (
-                      <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
+            <div className="charts-grid">
+              <div className="chart-box">
+                <h4>Daily Activity</h4>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={dailyData}>
+                    <CartesianGrid stroke="#eee" />
+                    <XAxis dataKey="day" fontSize={11} />
+                    <YAxis allowDecimals={false} fontSize={11} />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="count" stroke="#c9a24b" strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="chart-box">
+                <h4>Pass vs Flagged</h4>
+                <ResponsiveContainer width="100%" height={220}>
+                  <PieChart>
+                    <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={70} label>
+                      {pieData.map((entry, i) => (
+                        <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="chart-box">
+                <h4>Submissions by Sector</h4>
+                <ResponsiveContainer width="100%" height={220}>
+                  <BarChart data={sectorData}>
+                    <CartesianGrid stroke="#eee" />
+                    <XAxis dataKey="sector" fontSize={11} />
+                    <YAxis allowDecimals={false} fontSize={11} />
+                    <Tooltip />
+                    <Bar dataKey="count" fill="#0a1f44" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
 
-            <div className="chart-box">
-              <h4>Submissions by Sector</h4>
-              <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={sectorData}>
-                  <CartesianGrid stroke="#eee" />
-                  <XAxis dataKey="sector" fontSize={11} />
-                  <YAxis allowDecimals={false} fontSize={11} />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#0a1f44" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          <button className="primary-button" style={{ maxWidth: 220, marginTop: 24 }} onClick={exportCSV}>
-            Export CSV
-          </button>
-       </>
-        )}
-        </>
+            <button className="primary-button" style={{ maxWidth: 220, marginTop: 24 }} onClick={exportCSV}>
+              Export CSV
+            </button>
+          </>
+        )
       )}
 
       {tab === "submissions" && (
-        <table className="admin-table">
-          <thead><tr><th>Org</th><th>Sector</th><th>Score</th><th>Risk Flags</th><th>Date</th></tr></thead>
-          <tbody>
-            {submissions.map((s) => (
-              <tr key={s.id}>
-                <td>{s.org_name}</td>
-                <td>{s.sector || "—"}</td>
-                <td>{s.overall_score}</td>
-                <td>{(s.risk_flags || []).map((f) => f.type).join(", ") || "None"}</td>
-                <td>{new Date(s.timestamp).toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-  )
+        submissions.length === 0 ? (
+          <EmptyState title="No submissions yet" />
+        ) : (
+          <table className="admin-table">
+            <thead><tr><th>Org</th><th>Sector</th><th>Score</th><th>Risk Flags</th><th>Date</th></tr></thead>
+            <tbody>
+              {submissions.map((s) => (
+                <tr key={s.id}>
+                  <td>{s.org_name}</td>
+                  <td>{s.sector || "—"}</td>
+                  <td>{s.overall_score}</td>
+                  <td>{(s.risk_flags || []).map((f) => f.type).join(", ") || "None"}</td>
+                  <td>{new Date(s.timestamp).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
       )}
 
       {tab === "feedback" && (
-        <table className="admin-table">
-          <thead><tr><th>Org</th><th>Rating</th><th>Comment</th><th>Date</th></tr></thead>
-          <tbody>
-            {feedback.map((f) => (
-              <tr key={f.id}>
-                <td>{f.org_name}</td>
-                <td>{"★".repeat(f.rating)}</td>
-                <td>{f.comment || "—"}</td>
-                <td>{new Date(f.timestamp).toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        feedback.length === 0 ? (
+          <EmptyState title="No feedback yet" />
+        ) : (
+          <table className="admin-table">
+            <thead><tr><th>Org</th><th>Rating</th><th>Comment</th><th>Date</th></tr></thead>
+            <tbody>
+              {feedback.map((f) => (
+                <tr key={f.id}>
+                  <td>{f.org_name}</td>
+                  <td>{"★".repeat(f.rating)}</td>
+                  <td>{f.comment || "—"}</td>
+                  <td>{new Date(f.timestamp).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
       )}
 
       {tab === "contacts" && (
-        <table className="admin-table">
-          <thead><tr><th>Name</th><th>Email</th><th>Message</th><th>Date</th></tr></thead>
-          <tbody>
-            {contacts.map((c) => (
-              <tr key={c.id}>
-                <td>{c.name}</td>
-                <td>{c.email}</td>
-                <td>{c.message}</td>
-                <td>{new Date(c.timestamp).toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        contacts.length === 0 ? (
+          <EmptyState title="No contact messages yet" />
+        ) : (
+          <table className="admin-table">
+            <thead><tr><th>Name</th><th>Email</th><th>Message</th><th>Date</th></tr></thead>
+            <tbody>
+              {contacts.map((c) => (
+                <tr key={c.id}>
+                  <td>{c.name}</td>
+                  <td>{c.email}</td>
+                  <td>{c.message}</td>
+                  <td>{new Date(c.timestamp).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
       )}
     </div>
   );

@@ -986,35 +986,6 @@ body {
 .toast-error { background: #b23a3a; }
 .toast-info { background: var(--navy); }
 
-/* --- Admin login --- */
-.admin-login {
-  max-width: 360px;
-  margin: 100px auto;
-  background: white;
-  padding: 36px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(10,31,68,0.08);
-  text-align: center;
-}
-
-.admin-login input {
-  width: 100%;
-  padding: 12px;
-  margin: 16px 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
-.admin-login button {
-  width: 100%;
-  padding: 12px;
-  background: var(--navy);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
-}
 
 /* --- Dashboard --- */
 .stat-cards {
@@ -1106,37 +1077,6 @@ body {
 .health-good { background: #6b9e3f; }
 .health-atrisk { background: #c9862f; }
 .health-critical { background: #b23a3a; }
-/* ===== Theme toggle ===== */
-.theme-toggle {
-  background: none;
-  border: 1.5px solid var(--gold);
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.25s;
-  margin-left: 16px;
-}
-
-.theme-toggle:hover {
-  transform: rotate(20deg);
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-
-.floating-theme-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 100;
-}
 
 /* ===== Empty state ===== */
 .empty-state {
@@ -1174,77 +1114,113 @@ body {
 .error-boundary h2 {
   color: var(--risk-high);
 }
-
-/* ===== Dark mode ===== */
-[data-theme="dark"] {
-  --bg: #12182b;
-  --text-dark: #e8e8f0;
+/* --- Admin login: full page, centered, branded --- */
+.admin-login-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  padding: 24px;
 }
 
-[data-theme="dark"] .questionnaire,
-[data-theme="dark"] .results,
-[data-theme="dark"] .intake-card,
-[data-theme="dark"] .feedback-card,
-[data-theme="dark"] .landing-nav,
-[data-theme="dark"] .pillar-card,
-[data-theme="dark"] .stat-card,
-[data-theme="dark"] .chart-box,
-[data-theme="dark"] .admin-table,
-[data-theme="dark"] .admin-login,
-[data-theme="dark"] .error-boundary {
-  background: #1b2340;
+.admin-login-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.35;
 }
 
-[data-theme="dark"] .questionnaire h2,
-[data-theme="dark"] .results h2,
-[data-theme="dark"] .landing-content-section h2,
-[data-theme="dark"] .pillar-card h3,
-[data-theme="dark"] .step-flow-item h4,
-[data-theme="dark"] .stepper-label,
-[data-theme="dark"] .intake-card h2,
-[data-theme="dark"] .feedback-card h2,
-[data-theme="dark"] .chart-box h4,
-[data-theme="dark"] .faq-question,
-[data-theme="dark"] .report-section h3,
-[data-theme="dark"] .empty-state h3,
-[data-theme="dark"] .app-header h1 {
-  color: #f0d9a0;
+.admin-login-blob-1 {
+  width: 340px;
+  height: 340px;
+  background: var(--gold);
+  top: -60px;
+  left: -60px;
 }
 
-[data-theme="dark"] .intake-subtitle,
-[data-theme="dark"] .section-subtitle,
-[data-theme="dark"] .feedback-card p,
-[data-theme="dark"] .pillar-card p,
-[data-theme="dark"] .step-flow-item p,
-[data-theme="dark"] .faq-answer,
-[data-theme="dark"] .stat-card-label,
-[data-theme="dark"] .landing-footer,
-[data-theme="dark"] .app-header p {
-  color: #a8b0c8;
+.admin-login-blob-2 {
+  width: 260px;
+  height: 260px;
+  background: #3a5f9e;
+  bottom: -60px;
+  right: -40px;
 }
 
-[data-theme="dark"] .intake-card input,
-[data-theme="dark"] .intake-card select,
-[data-theme="dark"] .feedback-card textarea,
-[data-theme="dark"] .contact-form input,
-[data-theme="dark"] .contact-form textarea,
-[data-theme="dark"] .admin-login input {
-  background: #12182b;
-  color: #e8e8f0;
-  border-color: #3a4470;
+.admin-login-watermark {
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
-[data-theme="dark"] .faq-item,
-[data-theme="dark"] .landing-footer {
-  border-color: #2c3557;
+.admin-login-card {
+  position: relative;
+  z-index: 2;
+  background: white;
+  max-width: 380px;
+  width: 100%;
+  padding: 40px 36px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  text-align: center;
 }
 
-[data-theme="dark"] .admin-table th,
-[data-theme="dark"] .admin-table td {
-  border-color: #2c3557;
+.admin-login-logo {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin-bottom: 18px;
 }
 
-[data-theme="dark"] .admin-table th {
-  background: #12182b;
-  color: #f0d9a0;
+.admin-login-card h2 {
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.admin-login-subtitle {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.admin-login-card input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.admin-login-card button {
+  width: 100%;
+  padding: 12px;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-login-card button:hover {
+  background: var(--navy-light);
+}
+
+@media (max-width: 480px) {
+  .admin-login-watermark {
+    width: 320px;
+    height: 320px;
+    opacity: 0.6;
+  }
 }

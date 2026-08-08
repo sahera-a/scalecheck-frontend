@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import ThemeToggle from "./ThemeToggle";
 const FAQS = [
   {
     q: "What is the OIN framework?",
@@ -90,18 +89,17 @@ function RevealSection({ id, className = "", children }) {
   );
 }
 
-function Landing({ onStart, theme, onToggleTheme }) {
+function Landing({ onStart }) {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
     <div className="landing">
-      <nav className="landing-nav">
+     <nav className="landing-nav">
   <span className="logo">ScaleCheck</span>
   <div className="nav-right">
     <a href="#about">About</a>
     <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
-    <ThemeToggle theme={theme} onToggle={onToggleTheme} />
   </div>
 </nav>
 
