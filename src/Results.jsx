@@ -8,6 +8,7 @@ import {
 } from "recharts";
 import { DIMENSION_LABELS, SHORT_DIMENSION_LABELS } from "./questions";
 import { generateReportPdf } from "./generateReportPdf";
+import RemediationGuide from "./RemediationGuide";
 
 function getHealthInfo(score) {
   if (score >= 80) return { label: "Excellent", className: "health-excellent" };
@@ -66,6 +67,8 @@ function Results({ result, onRestart, onFeedback }) {
         <h3>Diagnostic Report</h3>
         <p>{generateNarrative(result)}</p>
       </div>
+
+      <RemediationGuide riskFlags={risk_flags} />
 
       <div className="about-framework">
         This diagnostic operationalizes the OIN framework (Ownership, Integration,
