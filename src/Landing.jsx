@@ -226,8 +226,17 @@ function Landing({ onStart }) {
       </RevealSection>
 
       <footer className="landing-footer">
-        ScaleCheck — built on original research into stalled AI pilot-to-production conversion.
-      </footer>
+  <div className="footer-content">
+    <span className="footer-logo">ScaleCheck</span>
+    <p>Built on original research into stalled AI pilot-to-production conversion in Indian enterprises.</p>
+    <div className="footer-links">
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p className="footer-copyright">© {new Date().getFullYear()} ScaleCheck</p>
+  </div>
+</footer>
     </div>
   );
 }

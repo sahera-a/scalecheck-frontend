@@ -1224,3 +1224,104 @@ body {
     opacity: 0.6;
   }
 }
+/* --- Structured footer --- */
+.landing-footer {
+  background: var(--navy);
+  padding: 48px 6vw;
+  text-align: center;
+  border-top: none;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.landing-footer p {
+  color: #b8c2d8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 16px 0;
+}
+
+.footer-links a {
+  color: #d6dced;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+}
+
+.footer-copyright {
+  font-size: 0.78rem;
+  color: #7a86a3;
+  margin-top: 8px;
+}
+
+/* --- Hover polish across the app --- */
+.nav-buttons button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-buttons button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 31, 68, 0.2);
+}
+
+.restart-button {
+  transition: transform 0.15s ease;
+}
+
+.restart-button:hover {
+  transform: translateY(-2px);
+}
+
+.stat-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(10, 31, 68, 0.12);
+}
+
+.chart-box {
+  transition: box-shadow 0.2s ease;
+}
+
+.chart-box:hover {
+  box-shadow: 0 6px 18px rgba(10, 31, 68, 0.12);
+}
+
+.admin-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.admin-table tbody tr:hover {
+  background: var(--bg);
+}
+
+.faq-item {
+  transition: background 0.15s ease;
+}
+
+.faq-item:hover {
+  background: #fafaf7;
+}
