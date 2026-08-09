@@ -3,6 +3,7 @@ import { SECTOR_LABELS } from "./questions";
 
 function OrgIntake({ onSubmit }) {
   const [orgName, setOrgName] = useState("");
+  const [email, setEmail] = useState("");
   const [industry, setIndustry] = useState("");
   const [teamSize, setTeamSize] = useState("");
   const [sector, setSector] = useState("general");
@@ -14,7 +15,7 @@ function OrgIntake({ onSubmit }) {
       setTouched(true);
       return;
     }
-    onSubmit({ orgName: orgName.trim(), industry, teamSize, sector });
+    onSubmit({ orgName: orgName.trim(), email: email.trim(), industry, teamSize, sector });
   };
 
   return (
@@ -33,6 +34,15 @@ function OrgIntake({ onSubmit }) {
         {touched && !orgName.trim() && (
           <p className="field-error">Please enter your organization name.</p>
         )}
+
+        <label>Email (optional)</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@company.com"
+        />
+        <p className="field-hint">Add this to find your report later under "My Reports."</p>
 
         <label>Industry</label>
         <select value={industry} onChange={(e) => setIndustry(e.target.value)}>

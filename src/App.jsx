@@ -5,6 +5,7 @@ import Questionnaire from "./Questionnaire";
 import Results from "./Results";
 import Feedback from "./Feedback";
 import AdminView from "./AdminView";
+import FindReports from "./FindReports";
 import Toast from "./Toast";
 import "./App.css";
 
@@ -51,7 +52,7 @@ function App() {
         ))}
       </div>
 
-      {view !== "landing" && (
+      {view !== "landing" && view !== "reports" && (
         <div className="app-header">
           <h1>ScaleCheck</h1>
           <p>An OIN Diagnostic for Pilot-to-Production Readiness</p>
@@ -71,7 +72,11 @@ function App() {
         </div>
       )}
 
-      {view === "landing" && <Landing onStart={() => setView("intake")} />}
+      {view === "landing" && (
+        <Landing onStart={() => setView("intake")} onFindReports={() => setView("reports")} />
+      )}
+
+      {view === "reports" && <FindReports onBack={handleRestart} />}
 
       {view === "intake" && (
         <OrgIntake

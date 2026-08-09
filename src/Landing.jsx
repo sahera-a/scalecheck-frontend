@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 const FAQS = [
   {
     q: "What is the OIN framework?",
@@ -89,19 +90,20 @@ function RevealSection({ id, className = "", children }) {
   );
 }
 
-function Landing({ onStart }) {
+function Landing({ onStart, onFindReports }) {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
     <div className="landing">
-     <nav className="landing-nav">
-  <span className="logo">ScaleCheck</span>
-  <div className="nav-right">
-    <a href="#about">About</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+      <nav className="landing-nav">
+        <span className="logo">ScaleCheck</span>
+        <div className="nav-right">
+          <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+          <button className="nav-link-button" onClick={onFindReports}>My Reports</button>
+        </div>
+      </nav>
 
       <section className="hero">
         <div className="hero-blob hero-blob-1"></div>
@@ -226,17 +228,17 @@ function Landing({ onStart }) {
       </RevealSection>
 
       <footer className="landing-footer">
-  <div className="footer-content">
-    <span className="footer-logo">ScaleCheck</span>
-    <p>Built on original research into stalled AI pilot-to-production conversion in Indian enterprises.</p>
-    <div className="footer-links">
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <p className="footer-copyright">© {new Date().getFullYear()} ScaleCheck</p>
-  </div>
-</footer>
+        <div className="footer-content">
+          <span className="footer-logo">ScaleCheck</span>
+          <p>Built on original research into stalled AI pilot-to-production conversion in Indian enterprises.</p>
+          <div className="footer-links">
+            <a href="#about">About</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <p className="footer-copyright">© {new Date().getFullYear()} ScaleCheck</p>
+        </div>
+      </footer>
     </div>
   );
 }

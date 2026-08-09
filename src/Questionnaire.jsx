@@ -45,6 +45,7 @@ function Questionnaire({ orgInfo, onResult, onError }) {
         "https://ion-scale-check-diagnostic.onrender.com/assessment",
         {
           org_name: orgInfo?.orgName || "Unnamed Org",
+          email: orgInfo?.email || "",
           industry: orgInfo?.industry || "",
           team_size: orgInfo?.teamSize || "",
           sector: orgInfo?.sector || "general",
@@ -101,4 +102,5 @@ function Questionnaire({ orgInfo, onResult, onError }) {
   );
 }
 
+export default Questionnaire;
 export default Questionnaire;
