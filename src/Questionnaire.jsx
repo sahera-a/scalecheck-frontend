@@ -103,4 +103,3 @@ function Questionnaire({ orgInfo, onResult, onError }) {
 }
 
 export default Questionnaire;
-export default Questionnaire;
