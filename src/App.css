@@ -1555,7 +1555,7 @@ body {
 
 .find-reports-date {
   font-size: 0.8rem;
-  color: #888;
+  color: #1f201e;
 }
 
 .find-reports-score {
@@ -1612,4 +1612,19 @@ body {
     radial-gradient(rgba(201,162,75,0.14) 1px, transparent 1px),
     linear-gradient(var(--navy), var(--navy));
   background-size: 20px 20px, 100% 100%;
+}
+/* --- Fix low-contrast text on Find My Reports page --- */
+.find-reports-card h2 {
+  color: var(--navy);
+  opacity: 1;
+}
+
+.find-reports-form input {
+  color: var(--text-dark);
+  background: white;
+}
+
+.find-reports-form input::placeholder {
+  color: #7a7a7a;
+  opacity: 1;
 }
